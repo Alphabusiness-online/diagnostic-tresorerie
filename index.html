@@ -1,32 +1,28 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>Redirection...</title>
-</head>
+<head><title>Redirection...</title></head>
 <body>
 <script>
-  var search = window.location.search;
-  var pairs = search.substring(1).split("&");
-  var score = 0;
+  var params = new URLSearchParams(window.location.search);
+  var score = params.get("score");
   
-  for (var i = 0; i < pairs.length; i++) {
-    var pair = pairs[i].split("=");
-    if (pair[0] === "score") {
-      score = parseInt(pair[1]);
-      break;
-    }
-  }
-
-  var url = "";
-  if (score >= 15) {
-    url = "https://daosavoie.systeme.io/51acce1c-cbcced2b-717be0a8";
-  } else if (score >= 8) {
-    url = "https://daosavoie.systeme.io/51acce1c-cbcced2b";
+  // Si pas de score, attend 2 secondes et relit
+  if (!score || score === "waiting") {
+    setTimeout(function() {
+      window.location.href = "https://alphabusiness-online.github.io/diagnostic-tresorerie/?score=waiting&retry=1";
+    }, 2000);
   } else {
-    url = "https://daosavoie.systeme.io/51acce1c";
+    score = parseInt(score);
+    var url = "";
+    if (score >= 15) {
+      url = "https://daosavoie.systeme.io/51acce1c-cbcced2b-717be0a8";
+    } else if (score >= 8) {
+      url = "https://daosavoie.systeme.io/51acce1c-cbcced2b";
+    } else {
+      url = "https://daosavoie.systeme.io/51acce1c";
+    }
+    window.location.replace(url);
   }
-
-  window.location.replace(url);
 </script>
 <p>Analyse en cours...</p>
 </body>
