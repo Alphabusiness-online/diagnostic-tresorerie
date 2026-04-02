@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Redirection...</title>
+</head>
+<body>
+<script>
+  var search = window.location.search;
+  var pairs = search.substring(1).split("&");
+  var score = 0;
+  
+  for (var i = 0; i < pairs.length; i++) {
+    var pair = pairs[i].split("=");
+    if (pair[0] === "score") {
+      score = parseInt(pair[1]);
+      break;
+    }
+  }
+
+  var url = "";
+  if (score >= 15) {
+    url = "https://daosavoie.systeme.io/51acce1c-cbcced2b-717be0a8";
+  } else if (score >= 8) {
+    url = "https://daosavoie.systeme.io/51acce1c-cbcced2b";
+  } else {
+    url = "https://daosavoie.systeme.io/51acce1c";
+  }
+
+  window.location.replace(url);
+</script>
+<p>Analyse en cours...</p>
+</body>
+</html>
